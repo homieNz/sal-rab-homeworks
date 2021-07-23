@@ -6,6 +6,9 @@ function calcShipping(sum, min, shipping) {
 let shippingSum;
 if (productsSum===0){shippingSum=0};
 if(productsSum>=freeShippingMinSum){shippingSum=0}
+
+// if (productsSum == 0 || productsSum >= freeShippingMinSum) {shippingPrice = 0;} альтернатива
+
 if(productsSum>0 &&  productsSum<freeShippingMinSum){shippingSum=shippingPrice}
     return shippingSum;
 }
@@ -19,6 +22,9 @@ function calcDiscount(sum, min, discount) {
     else {discountSum=0};
     return discountSum;
 }
+/*Во втором задании управляющую конструкцию лучше было заменить тернарным оператором. 
+Запись была бы компактней. 
+let discountSum = productsSum >= discountMinSum ? discountPart*productsSum/100 : 0; */
 
 function calcInvoice({sum, discountMinSum, discountPart, shippingFreeMinSum, shippingPrice}) {
     let productsSum = sum;
