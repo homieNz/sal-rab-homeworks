@@ -22,6 +22,7 @@ function calcDiscount(sum, min, discount) {
     else {discountSum=0};
     return discountSum;
 }
+
 /*Во втором задании управляющую конструкцию лучше было заменить тернарным оператором. 
 Запись была бы компактней. 
 let discountSum = productsSum >= discountMinSum ? discountPart*productsSum/100 : 0; */
