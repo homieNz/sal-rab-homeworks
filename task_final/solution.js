@@ -9,9 +9,9 @@
 // cформированный в соответствии с правилами:
 // Объект data содержит все данные
 // В объекте data есть свойства:
-// - client - строка, имя клиента + через дефис телефон клиента;
+// - client - строка, имя клиента + телефон клиента;
 // - order - объект, содержащий данные о заказе:
-//     - address - адрес доставки
+//     - address - строка с адресом доставки, записанным человекопонятным языком (как в примере)
 //     - sum - стоимость заказа с учетом скидок и доставки
 // - goods: массив объектов с информацией о позициях заказа:
 //     - title - название позиции
@@ -34,20 +34,22 @@
 // }
 
 function sendRequest(name, phone, address, goods, sum) {
-    let data = {goods: [], order: {}};
+    let client = name + " " + phone;
+    let addressForSend = "ул. " + address.street + ", дом " + address.house + ", " + address.entrance + " подъезд, " + address.floor + " этаж, кв " + address.flat;
+    let order = { address: addressForSend, sum: sum };
+    let goodsForSend = [];
 
     let countOfGoods = goods.length;
 
-    for (let i = 0; i <= countOfGoods; i += 1) {
-        data.goods.push(goods[i].title);
+    for (let i = 0; i < countOfGoods; i++) {
+        let good = { title: goods[i].title, count: goods[i].count };
+        goodsForSend.push(good);
     }
 
-    data.order.address = address;
-    data.order.sum = name + phone + address + goods + sum;
+    let data = { client:client, order:order, goods:goodsForSend };
+    let dataForSend = { data : data };
 
-    data.client = 'Иван';
-
-    let jsonData = JSON.stringify(data);
+    let jsonData = JSON.stringify(dataForSend);
 
     return jsonData;
 }
